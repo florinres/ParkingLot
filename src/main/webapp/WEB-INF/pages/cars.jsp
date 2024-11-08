@@ -34,4 +34,5 @@
             </div>
         </div>
     </div>
+    <h5>Free Parking Spots: ${free_parking_spots}</h5>
 </t:pageTemplate>
