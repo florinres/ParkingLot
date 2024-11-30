@@ -4,10 +4,7 @@ import com.parking.parkinglot.common.CarDto;
 import com.parking.parkinglot.entities.Car;
 import jakarta.ejb.EJBAccessException;
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,8 @@ public class CarsBean {
 
     public List<CarDto> findAllCars() {
         LOG.info("findAllCars");
+        emf = Persistence.createEntityManagerFactory("ParkingLot");
+        em =  emf.createEntityManager();
         try {
             TypedQuery<Car> typedQuery = em.createQuery("SELECT c FROM Car c", Car.class);
             List<Car> cars = typedQuery.getResultList();
@@ -37,13 +36,17 @@ public class CarsBean {
     private List<CarDto> copyCarsToDto(List<Car> cars) {
         List<CarDto> dtos = new ArrayList<>();
         for (Car car : cars) {
+            if (car == null) {
+                System.out.println("Null car found, skipping...");
+                continue;
+            }
+            // Procesare normală
             Long id = car.getId();
             String licensePlate = car.getLicensePlate();
             String parkingSpot = car.getParkingSpot();
             String owner = car.getOwner().getUsername();
             dtos.add(new CarDto(owner, parkingSpot, licensePlate, id));
         }
-
-        return dtos;
+            return dtos;
     }
 }

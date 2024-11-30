@@ -12,7 +12,7 @@
 <t:pageTemplate pageTitle="Cars">
 <h1>Cars</h1>
     <div class="container text-center">
-        <:c:forEach var="car" items="${cars}">
+        <c:forEach var="car" items="${cars}">
             <div class="row">
                 <div class="col">
                         ${car.licensePlate}
@@ -23,8 +23,8 @@
                 <div class="col">
                         ${car.ownerName}
                 </div>
-            </:c:forEach>
         </div>
+        </c:forEach>
     </div>
     <h5>Free Parking Spots: ${free_parking_spots}</h5>
 </t:pageTemplate>
