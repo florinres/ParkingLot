@@ -1,6 +1,5 @@
 package com.parking.parkinglot.servlets;
 
-import com.parking.parkinglot.common.CarDto;
 import com.parking.parkinglot.ejb.CarsBean;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
