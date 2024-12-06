@@ -1,30 +1,26 @@
 <%--
   Created by IntelliJ IDEA.
   User: rares
-  Date: 30.11.2024
-  Time: 21:31
+  Date: 06.12.2024
+  Time: 21:36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <t:pageTemplate pageTitle="Users">
-    <h1>Cars</h1>
+  <h1>Users</h1>
+  <:c:forEach var="user" items="${users}">
     <div class="container text-center">
-        <c:forEach var="user" items="${users}">
-            <div class="row">
-                <div class="col">
-                        ${user.licensePlate}
-                </div>
-                <div class="col">
-                        ${user.parkingSpot}
-                </div>
-                <div class="col">
-                        ${user.ownerName}
-                </div>
-            </div>
-        </c:forEach>
-    </div>
-    <h5>Number of users: ${numberofusers}</h5>
+        <div class="row">
+          <div class="col">
+              ${user.id}
+          </div>
+          <div class="col">
+              ${user.email}
+        </div>
+      </div>
+  </:c:forEach>
+  <h5>Number of users: ${numberofusers}</h5>
 </t:pageTemplate>

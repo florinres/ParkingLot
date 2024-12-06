@@ -1,12 +1,14 @@
 package com.parking.parkinglot.servlets;
 
+import com.parking.parkinglot.common.CarDto;
+import java.util.List;
+
 import com.parking.parkinglot.common.UserDto;
 import com.parking.parkinglot.ejb.UsersBean;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import java.util.List;
 import java.io.IOException;
 
 @WebServlet(name = "Users", value = "/Users")

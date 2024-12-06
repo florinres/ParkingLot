@@ -3,30 +3,25 @@ package com.parking.parkinglot.ejb;
 import com.parking.parkinglot.common.UserDto;
 import com.parking.parkinglot.entities.User;
 import jakarta.ejb.EJBException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Stateless
 public class UsersBean {
-    @PersistenceContext
-    EntityManager em;
     private static final Logger log = Logger.getLogger(UsersBean.class.getName());
+
+    @PersistenceContext
+    private EntityManager em;
+    EntityManagerFactory emf;
 
     private Long ID;
     private String EMAIL;
     private String PASSWORD;
     private String USERNAME;
-
-    public UsersBean(Long ID, String EMAIL, String PASSWORD, String USERNAME) {
-        this.ID = ID;
-        this.EMAIL = EMAIL;
-        this.PASSWORD = PASSWORD;
-        this.USERNAME = USERNAME;
-    }
 
     public Long getID() {
         return ID;
@@ -46,6 +41,8 @@ public class UsersBean {
 
     public List<UserDto> findAllUsers(){
         log.info("findAllUsers");
+        emf = Persistence.createEntityManagerFactory("ParkingLot");
+        em = emf.createEntityManager();
         try {
             TypedQuery<User> typedQuery = em.createQuery("SELECT u FROM User u", User.class);
             List<User> users = typedQuery.getResultList();
