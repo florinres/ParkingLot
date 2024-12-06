@@ -1,4 +1,4 @@
-package com.parking.parkinglot;
+package com.parking.parkinglot.servlets;
 
 import com.parking.parkinglot.common.UserDto;
 import com.parking.parkinglot.ejb.UsersBean;
@@ -17,8 +17,8 @@ public class Users extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-        List<UserDto> userDtoList = usersBean.findAllUsers();
-        request.setAttribute("users", userDtoList);
+        List<UserDto> users = usersBean.findAllUsers();
+        request.setAttribute("users", users);
         request.getRequestDispatcher("/WEB-INF/pages/users.jsp").forward(request,response);
     }
 

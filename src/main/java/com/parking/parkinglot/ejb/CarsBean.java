@@ -2,6 +2,7 @@ package com.parking.parkinglot.ejb;
 
 import com.parking.parkinglot.common.CarDto;
 import com.parking.parkinglot.entities.Car;
+import com.parking.parkinglot.entities.User;
 import jakarta.ejb.EJBAccessException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
@@ -48,5 +49,19 @@ public class CarsBean {
             dtos.add(new CarDto(owner, parkingSpot, licensePlate, id));
         }
             return dtos;
+    }
+
+    public void createCar(String licensePlate, String parkingSpot, Long userId) {
+        LOG.info("createCar");
+
+        Car car = new Car();
+        car.setLicensePlate(licensePlate);
+        car.setParkingSpot(parkingSpot);
+
+        User user = em.find(User.class, userId);
+        user.getCars().add(car);
+        car.setOwner(user);
+
+        em.persist(car);
     }
 }
