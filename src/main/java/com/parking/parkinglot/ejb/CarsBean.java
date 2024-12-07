@@ -56,10 +56,17 @@ public class CarsBean {
         car.setLicensePlate(licensePlate);
         car.setParkingSpot(parkingSpot);
 
+        // Găsește utilizatorul pe baza ID-ului
         User user = em.find(User.class, userId);
+        if (user == null) {
+            throw new IllegalArgumentException("User with ID " + userId + " not found");
+        }
+
+        // Adaugă mașina utilizatorului și setează relația inversă
         user.getCars().add(car);
         car.setOwner(user);
 
+        // Persistă mașina
         em.persist(car);
     }
 }
