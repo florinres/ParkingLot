@@ -43,7 +43,7 @@ public class CarsBean {
             Long id = car.getId();
             String licensePlate = car.getLicensePlate();
             String parkingSpot = car.getParkingSpot();
-            String owner = car.getOwner().getUsername();
+            User owner = car.getOwner();
             dtos.add(new CarDto(owner, parkingSpot, licensePlate, id));
         }
             return dtos;
@@ -68,5 +68,11 @@ public class CarsBean {
 
         // Persistă mașina
         em.persist(car);
+    }
+
+    public CarDto findById(Long carId) {
+        LOG.info("findById");
+        Car car = em.find(Car.class, carId);
+        return new CarDto(car.getOwner(), car.getParkingSpot(), car.getLicensePlate(), car.getOwner().getId());
     }
 }

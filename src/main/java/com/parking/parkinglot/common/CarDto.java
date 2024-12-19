@@ -1,13 +1,15 @@
 package com.parking.parkinglot.common;
 
+import com.parking.parkinglot.entities.User;
+
 public class CarDto {
     Long id;
     String licensePlate;
     String parkingSpot;
-    String ownerName;
+    User owner;
 
-    public CarDto(String ownerName, String parkingSpot, String licensePlate, Long id) {
-        this.ownerName = ownerName;
+    public CarDto(User owner, String parkingSpot, String licensePlate, Long id) {
+        this.owner = owner;
         this.parkingSpot = parkingSpot;
         this.licensePlate = licensePlate;
         this.id = id;
@@ -25,8 +27,8 @@ public class CarDto {
         return parkingSpot;
     }
 
-    public String getOwnerName() {
-        return ownerName;
+    public User getOwner() {
+        return owner;
     }
 
 
